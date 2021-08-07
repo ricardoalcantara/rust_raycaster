@@ -129,15 +129,17 @@ fn draw_rays2d(p: &Player) {
             depth_of_field = 8;
         }
 
-        while depth_of_field < 8 {
+        while depth_of_field < 2 {
             map_x = ray_x as i32 >> 6;
             map_y = ray_y as i32 >> 6;
             map_point = map_y * MAP_X + map_x;
-
+            
+            hx = ray_x;
+            hy = ray_y;
+            dist_h = dist(player_x, player_y, hx, hy, ray_angle);
             if map_point > 0 && map_point < (MAP_X * MAP_Y) && MAP[map_point as usize] == 1 {
-                hx = ray_x;
-                hy = ray_y;
-                dist_h = dist(player_x, player_y, hx, hy, ray_angle);
+                
+                // dist_h = dist(player_x, player_y, hx, hy, ray_angle);
                 depth_of_field = 8; // hit wall
             } else {
                 ray_x += ray_x_offset;
@@ -169,15 +171,17 @@ fn draw_rays2d(p: &Player) {
             depth_of_field = 8;
         }
 
-        while depth_of_field < 8 {
+        while depth_of_field < 2 {
             map_x = ray_x as i32 >> 6;
             map_y = ray_y as i32 >> 6;
             map_point = map_y * MAP_X + map_x;
-
+            
+            vx = ray_x;
+            vy = ray_y;
+            dist_v = dist(player_x, player_y, vx, vy, ray_angle);
             if map_point > 0 && map_point < (MAP_X * MAP_Y) && MAP[map_point as usize] == 1 {
-                vx = ray_x;
-                vy = ray_y;
-                dist_v = dist(player_x, player_y, vx, vy, ray_angle);
+                
+                // dist_v = dist(player_x, player_y, vx, vy, ray_angle);
                 depth_of_field = 8; // hit wall
             } else {
                 ray_x += ray_x_offset;
